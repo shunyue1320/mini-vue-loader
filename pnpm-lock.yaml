@@ -5,6 +5,7 @@ specifiers:
   '@babel/preset-env': ^7.18.10
   babel-loader: ^8.2.5
   css-loader: ^6.7.1
+  hash-sum: ^2.0.0
   html-webpack-plugin: ^5.5.0
   style-loader: ^3.3.1
   vue: ^3.2.38
@@ -12,6 +13,9 @@ specifiers:
   webpack: ^5.74.0
   webpack-cli: ^4.10.0
   webpack-dev-server: ^4.10.1
+
+dependencies:
+  hash-sum: 2.0.0
 
 devDependencies:
   '@babel/core': 7.18.13
@@ -2516,7 +2520,6 @@ packages:
 
   /hash-sum/2.0.0:
     resolution: {integrity: sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==}
-    dev: true
 
   /he/1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}

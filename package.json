@@ -13,6 +13,9 @@
 		"learning"
 	],
 	"author": "shunyue1320",
+	"dependencies": {
+		"hash-sum": "^2.0.0"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.18.13",
 		"@babel/preset-env": "^7.18.10",
