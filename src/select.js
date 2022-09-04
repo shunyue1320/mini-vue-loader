@@ -13,6 +13,12 @@ function selectBlock(descriptor, scopedId, loaderContext, query) {
     loaderContext.callback(null, template.content)
     return
   }
+
+  if (query.get('type') === 'style') {
+    const style = descriptor.styles[Number(query.get('index'))]
+    loaderContext.callback(null, style.content)
+    return
+  }
 }
 
 exports.selectBlock = selectBlock

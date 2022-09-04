@@ -30,7 +30,7 @@ class VueLoaderPlugin {
     // 3.拿到所有处理 vue 文件的 loader，塞入到 pitcher 与 template 两个自定义 loader 中间
     const vueRule = rules.find(rule => 'foo.vue'.match(rule.test))
     const cloneRules = rules.filter(rule => rule !== vueRule).map(cloneRule)
-    compiler.options.module.rules = [ pitcher, templateCompilerRule, ...rules ]
+    compiler.options.module.rules = [ pitcher, ...cloneRules, templateCompilerRule, ...rules ]
   }
 }
 

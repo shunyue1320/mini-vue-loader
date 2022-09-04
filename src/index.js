@@ -29,7 +29,7 @@ function loader(source) { // source: example/App.vue 源码
   /************ 第一次进来 vue-loader 执行如下 start ************/
   const code = []
   // 拿到 vue 文件中 <script> 标签内的 js 代码
-  const { script, template } = descriptor // { template, script, styles, ... }
+  const { script, template, styles } = descriptor // { template, script, styles, ... }
   if (script) {
     const query = `?vue&type=script&id=${id}&lang=js`
     // request = "./App.vue?vue&type=script&id=5b5eb0b0&lang=js"
@@ -44,6 +44,21 @@ function loader(source) { // source: example/App.vue 源码
     const query = `?vue&type=template&id=${id}${scopedQuery}&lang=js`
     const request = stringifyRequest(loaderContext, resourcePath + query)
     code.push(`import { render } from ${request}`)
+  }
+
+  // <style> 生成 css 方法
+  if (styles.length > 0) {
+    styles.forEach((style, index) => {
+      const scopedQuery = style.scoped ? `&scoped=true` : ``
+      const query = `?vue&type=style&index=${index}&id=${id}${scopedQuery}&lang=css`
+      const request = stringifyRequest(loaderContext, resourcePath + query)
+      code.push(`import ${request}`)
+    })
+  }
+
+  // vue组件局部 css
+  if (hasScoped) {
+    code.push(`script.__scopeId = "data-v-${id}"`);
   }
 
   code.push(`script.render = render`)

@@ -6,11 +6,11 @@ const { VueLoaderPlugin } = require('./src')
 
 module.exports = {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: false,
   entry: './example/main.js',
   devServer: {
-    // compress: true,
-    // open: true,
+    compress: true,
+    open: true,
     port: 3000,
   },
   module: {
@@ -30,6 +30,13 @@ module.exports = {
         test: /\.vue$/,
         // loader: 'vue-loader'
         loader: path.resolve(__dirname, 'src')
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       },
     ]
   },
