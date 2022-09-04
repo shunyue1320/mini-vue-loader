@@ -1,5 +1,5 @@
 const { stringifyRequest } = require('./utils')
-const stylePostLoaderPath = require.resolve('./stylePostLoader')
+// const stylePostLoaderPath = require.resolve('./stylePostLoader')
 
 // loader路径不是当前路径返回 true
 const isNotPitcher = loader => loader.path !== __filename
@@ -12,6 +12,8 @@ const pitch = function (params) {
   const query = new URLSearchParams(loaderContext.resourceQuery.slice(1))
   // query = { vue: '', type: 'script' }
 }
+
+const pitcher = code => code
 
 // ⚠️ webpack loader 的执行规则： pitch 有返回时就不会走后续 loader
 exports.pitch = pitch

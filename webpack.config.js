@@ -10,8 +10,8 @@ module.exports = {
   entry: './example/main.js',
   devServer: {
     // compress: true,
+    // open: true,
     port: 3000,
-    open: true,
   },
   module: {
     rules: [

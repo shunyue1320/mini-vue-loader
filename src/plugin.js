@@ -1,4 +1,5 @@
 
+// VueLoaderPlugin：在 webpack 编译之前就会执行 plugin
 class VueLoaderPlugin {
   apply(compiler) {
     // 拿到 webpack.config.js 内部配置的所有 rules

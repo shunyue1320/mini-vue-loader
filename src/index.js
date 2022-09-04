@@ -1,8 +1,9 @@
 const compiler = require('vue/compiler-sfc') // 编译 vue 文件
 const hash = require('hash-sum')
 
+const select = require('./select')
 const { stringifyRequest } = require('./utils')
-const plugin_1 = require("./plugin");
+const plugin_1 = require("./plugin")
 exports.VueLoaderPlugin = plugin_1.default
 
 function loader(source) { // source: example/App.vue 源码
@@ -14,6 +15,14 @@ function loader(source) { // source: example/App.vue 源码
   const { resourcePath, resourceQuery } = loaderContext
   const { descriptor } = compiler.parse(source)
   const id = hash(resourcePath)
+
+  /************ 第二次进来 vue-loader 执行如下 start ************/
+  const rawQuery = resourceQuery.slice(1)
+  const incomingQuery = new URLSearchParams(rawQuery)
+  if (incomingQuery.get('type')) {
+    return select.selectBlock(descriptor, id, loaderContext, incomingQuery)
+  }
+  /************ 第二次进来 vue-loader 执行如下 end ************/
 
 
 
