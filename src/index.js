@@ -29,12 +29,21 @@ function loader(source) { // source: example/App.vue 源码
   /************ 第一次进来 vue-loader 执行如下 start ************/
   const code = []
   // 拿到 vue 文件中 <script> 标签内的 js 代码
-  const { script } = descriptor // { template, script, styles, ... }
+  const { script, template } = descriptor // { template, script, styles, ... }
   if (script) {
     const query = `?vue&type=script&id=${id}&lang=js`
-    const request = stringifyRequest(loaderContext, resourcePath + query)
     // request = "./App.vue?vue&type=script&id=5b5eb0b0&lang=js"
+    const request = stringifyRequest(loaderContext, resourcePath + query)
     code.push(`import script from ${request}`)
+  }
+
+  const hasScoped = descriptor.styles.some(s => s.scoped)
+  // <template> 生成 render 方法
+  if (template) {
+    const scopedQuery = hasScoped ? `&scoped=true` : ``
+    const query = `?vue&type=template&id=${id}${scopedQuery}&lang=js`
+    const request = stringifyRequest(loaderContext, resourcePath + query)
+    code.push(`import { render } from ${request}`)
   }
 
   code.push(`script.render = render`)
